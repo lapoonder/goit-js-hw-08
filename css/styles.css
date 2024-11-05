@@ -65,6 +65,11 @@ body {
 .gallery-item {
   width: 100%;
   max-width: 360px;
+  transition: transform 250ms ease-in-out;
+}
+
+.gallery-item:hover {
+  transform: scale(calc(376 / 360));
 }
 
 .gallery-image {
