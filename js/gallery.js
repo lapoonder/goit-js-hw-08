@@ -66,11 +66,7 @@ const images = [
 ];
 
 const gallery = document.querySelector('.gallery'),
-  modalWindow = basicLightbox.create(`<img src="" width="1112" height="640">`, {
-    onClose: modalWindow => {
-      document.querySelector('.basicLightbox img').setAttribute('src', '');
-    },
-  }),
+  modalWindow = basicLightbox.create(`<img src="" width="1112" height="640">`),
   insertElementGellery = images
     .map(({ preview, original, description }) => {
       return `<li class="gallery-item">
@@ -94,10 +90,12 @@ function clickOnImage(e) {
   if (e.target.nodeName !== 'IMG') {
     return; // користувач клікнув між зображеннями
   }
-  modalWindow.show(() => {
-    document.querySelector('.basicLightbox img').setAttribute('src', '');
-    document
-      .querySelector(`.basicLightbox img`)
-      .setAttribute('src', e.target.dataset.source);
-  });
+  // Можно так обратится к атрибуту и указать значение
+  //modalWindow.element().querySelector('img').src = e.target.dataset.source;
+  // А можно и так
+  modalWindow
+    .element()
+    .querySelector('img')
+    .setAttribute('src', e.target.dataset.source);
+  modalWindow.show();
 }
